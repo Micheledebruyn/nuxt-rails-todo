@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.7.1
 
 ARG UID
 RUN adduser rails --uid $UID --disabled-password --gecos ""
@@ -12,4 +12,4 @@ RUN bundle install -j3 --path vendor/bundle
 
 COPY . $APP/
 
-CMD ["rails", "server", "-p", "8080", "-b", "0.0.0.0"]
+CMD [ "bundle", "exec", "rails", "server", "-p", "8080", "-b", "0.0.0.0"]
