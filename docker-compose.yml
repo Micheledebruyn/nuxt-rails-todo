@@ -4,7 +4,12 @@ services:
     image: postgres
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: '${POSTGRESS_PASSWORD}'
+      POSTGRES_DB: "db"
   backend:
+    env_file:
+      - .env
     build:
       context: todo-backend
       args:
@@ -19,6 +24,10 @@ services:
     links:
       - db:db
     user: rails
+    environment:
+      RAILS_ENV: development
+      POSTGRES_PASSWORD: '${POSTGRESS_PASSWORD}'
+      POSTGRES_DB: "db"
   frontend:
     build:
       context: todo-frontend
